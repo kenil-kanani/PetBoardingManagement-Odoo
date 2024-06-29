@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
 
 const Link = ({ href, children, ...props }) => (
   <a href={href} {...props}>
@@ -18,11 +19,13 @@ export default function Login() {
     email: "",
     password: "",
   });
-  const { login, loading, user } = useContext(AuthContext);
+  const { isLoggedIn, login, loading, user, role } = useContext(AuthContext);
 
   useEffect(() => {
-    if (!loading && user) {
-      navigate("/");
+    if (isLoggedIn && role === "user") {
+      navigate("/userDashboard");
+    } else if (isLoggedIn && role === "admin") {
+      navigate("/adminDashboard");
     }
   });
 
@@ -37,23 +40,25 @@ export default function Login() {
       return;
     }
     try {
-      const response = await fetch("http://localhost:3000/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formdata),
-      });
-      const data = await response.json();
+      const response = await axios.post(
+        "http://localhost:3000/api/auth/login",
+        formdata
+      );
+
       if (response.status === 200) {
-        toast.success("Login successful");
-        const d = {
-          token: data.token,
-          role: data.role,
-          user: data.user,
-        };
-        login(d);
-        navigate("/");
+        alert("Login successful");
+        const data = response.data.data;
+        const { token, user } = data;
+        login({
+          token: token,
+          role: user.role,
+          user: user.email,
+        });
+        if (user.role === "user") {
+          navigate("/user-dashboard");
+        } else if (user.email === "admin") {
+          navigate("/admin-dashboard");
+        }
       } else {
         toast.error("Login failed");
       }

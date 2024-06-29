@@ -8,10 +8,12 @@ import { AuthContext } from "../context/AuthContext";
 import { ToastContainer, toast } from "react-toastify";
 
 export default function SignUp() {
-  const { user, loading } = useContext(AuthContext);
+  const { role, isLoggedIn } = useContext(AuthContext);
   useEffect(() => {
-    if (!loading && user) {
-      navigate("/");
+    if (isLoggedIn && role === "user") {
+      navigate("/userDashboard");
+    } else if (isLoggedIn && role === "admin") {
+      navigate("/adminDashboard");
     }
   });
   const navigate = useNavigate();
