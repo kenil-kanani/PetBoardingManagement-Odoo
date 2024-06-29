@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { Pet } from "../models/pet.model.js";
+import MedicalInfo from "../models/medicalinfo.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 
@@ -15,17 +16,6 @@ const createPet = async ({
   characteristics,
 }) => {
   try {
-    console.log("PET REPOSITORY ", {
-      name,
-      breed,
-      age,
-      gender,
-      weight,
-      description,
-      owner,
-      color,
-      characteristics,
-    });
     const newPet = new Pet({
       name,
       breed,
@@ -38,7 +28,14 @@ const createPet = async ({
       characteristics,
     });
     await newPet.save();
-    
+
+    const newMedicalInfo = new MedicalInfo({
+      medicalDocsFile: [],
+      petId: newPet._id,
+    });
+
+    await newMedicalInfo.save();
+
     return newPet;
   } catch (error) {
     console.log("createPet error: ", error);

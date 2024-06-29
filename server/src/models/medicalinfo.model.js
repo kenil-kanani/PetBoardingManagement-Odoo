@@ -10,6 +10,7 @@ const medicalInfoSchema = new Schema(
         type: String,
       }],
       required: false,
+      default: [],
     },
     petId: {
       type: Schema.Types.ObjectId,

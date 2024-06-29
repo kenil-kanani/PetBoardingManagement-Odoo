@@ -12,6 +12,8 @@ const AuthContext = createContext({
   logout: () => {},
 });
 
+
+
 const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);

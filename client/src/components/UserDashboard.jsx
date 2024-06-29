@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -21,6 +21,9 @@ import {
 import { Avatar, AvatarImage, AvatarFallback } from "../components/ui/avatar";
 
 export default function UserDashboard() {
+
+	const [activeSection, setActiveSection] = useState("dashboard");
+
 	return (
 		<div className="grid min-h-screen w-full grid-cols-[200px_1fr] bg-secondary">
 			<aside className="flex flex-col border-r bg-background">
@@ -56,377 +59,406 @@ export default function UserDashboard() {
 					</DropdownMenu>
 				</div>
 				<nav className="flex flex-col gap-2 px-4 py-6">
-					<Button className="flex items-center gap-3 rounded-md px-3 py-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground">
+					<Button
+						className={`flex items-center gap-3 rounded-md px-3 py-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground ${activeSection === "dashboard" ? "bg-accent text-accent-foreground" : ""}`}
+						onClick={() => setActiveSection("dashboard")}
+					>
 						<HomeIcon className="h-5 w-5" />
 						Dashboard
 					</Button>
-					<Button className="flex items-center gap-3 rounded-md px-3 py-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground">
+					<Button
+						className={`flex items-center gap-3 rounded-md px-3 py-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground ${activeSection === "petProfiles" ? "bg-accent text-accent-foreground" : ""}`}
+						onClick={() => setActiveSection("petProfiles")}
+					>
 						<DogIcon className="h-5 w-5" />
 						Pet Profiles
 					</Button>
-					<Button className="flex items-center gap-3 rounded-md px-3 py-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground">
+					<Button
+						className={`flex items-center gap-3 rounded-md px-3 py-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground ${activeSection === "bookings" ? "bg-accent text-accent-foreground" : ""}`}
+						onClick={() => setActiveSection("bookings")}
+					>
 						<CalendarIcon className="h-5 w-5" />
 						Bookings
 					</Button>
-					<Button className="flex items-center gap-3 rounded-md px-3 py-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground">
+					<Button
+						className={`flex items-center gap-3 rounded-md px-3 py-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground ${activeSection === "payments" ? "bg-accent text-accent-foreground" : ""}`}
+						onClick={() => setActiveSection("payments")}
+					>
 						<CreditCardIcon className="h-5 w-5" />
 						Payments
 					</Button>
 				</nav>
 			</aside>
 			<main className="flex flex-col gap-4 p-4 sm:p-6">
-				<section className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-					<Card>
-						<CardHeader>
-							<CardTitle>Upcoming Bookings</CardTitle>
-							<CardDescription>
-								View your upcoming pet care appointments.
-							</CardDescription>
-						</CardHeader>
-						<CardContent>
-							<div className="grid gap-4">
-								<div className="flex items-center gap-4">
-									<div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#eec3e8] text-black">
-										<CalendarIcon className="h-6 w-6" />
-									</div>
-									<div>
-										<div className="font-medium">
-											Grooming Appointment
+
+				{/* Dashboard */}
+				{activeSection === "dashboard" && (
+					<section className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2">
+						{/* Upcoming Bookings */}
+						<Card>
+							<CardHeader>
+								<CardTitle>Upcoming Bookings</CardTitle>
+								<CardDescription>
+									View your upcoming pet care appointments.
+								</CardDescription>
+							</CardHeader>
+							<CardContent>
+								<div className="grid gap-4">
+									<div className="flex items-center gap-4">
+										<div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#eec3e8] text-black">
+											<CalendarIcon className="h-6 w-6" />
 										</div>
+										<div>
+											<div className="font-medium">
+												Grooming Appointment
+											</div>
+											<div className="text-sm text-muted-foreground">
+												June 15, 2023 - 10:00 AM
+											</div>
+										</div>
+									</div>
+									<div className="flex items-center gap-4">
+										<div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#eec3e8] text-black">
+											<CalendarIcon className="h-6 w-6" />
+										</div>
+										<div>
+											<div className="font-medium">
+												Vet Checkup
+											</div>
+											<div className="text-sm text-muted-foreground">
+												June 20, 2023 - 2:30 PM
+											</div>
+										</div>
+									</div>
+								</div>
+							</CardContent>
+							<CardFooter>
+								<Button className="text-primary bg-[#eec3e8] hover:bg-accent hover:text-accent-foreground text-[#d254c1]">
+									View all bookings
+								</Button>
+							</CardFooter>
+						</Card>
+
+						{/* Recent Activity */}
+						<Card>
+							<CardHeader>
+								<CardTitle>Recent Activity</CardTitle>
+								<CardDescription>
+									See your latest pet-related activities.
+								</CardDescription>
+							</CardHeader>
+							<CardContent>
+								<div className="grid gap-4">
+									<div className="flex items-center gap-4">
+										<div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-accent-foreground">
+											<PawPrintIcon className="h-6 w-6" />
+										</div>
+										<div>
+											<div className="font-medium">
+												Bella's Vet Visit
+											</div>
+											<div className="text-sm text-muted-foreground">
+												June 10, 2023
+											</div>
+										</div>
+									</div>
+									<div className="flex items-center gap-4">
+										<div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-accent-foreground">
+											<PawPrintIcon className="h-6 w-6" />
+										</div>
+										<div>
+											<div className="font-medium">
+												Grooming for Max
+											</div>
+											<div className="text-sm text-muted-foreground">
+												June 5, 2023
+											</div>
+										</div>
+									</div>
+								</div>
+							</CardContent>
+							<CardFooter>
+								<Button className="text-primary bg-[#eec3e8] hover:bg-accent hover:text-accent-foreground text-[#d254c1]">
+									View all activity
+								</Button>
+							</CardFooter>
+						</Card>
+
+						{/* Notifications */}
+						<Card>
+							<CardHeader>
+								<CardTitle>Notifications</CardTitle>
+								<CardDescription>
+									Stay up-to-date with important alerts.
+								</CardDescription>
+							</CardHeader>
+							<CardContent>
+								<div className="grid gap-4">
+									<div className="flex gap-4">
+										<div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500 text-blue-500-foreground">
+											<BellIcon className="h-5 w-5" />
+										</div>
+										<div>
+											<div className="font-medium">
+												Appointment Reminder
+											</div>
+											<div className="text-sm text-muted-foreground">
+												Your grooming appointment is
+												tomorrow at 10 AM.
+											</div>
+										</div>
+									</div>
+									<div className="flex items-center gap-4">
+										<div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500 text-blue-500-foreground">
+											<BellIcon className="h-6 w-6" />
+										</div>
+										<div>
+											<div className="font-medium">
+												Medication Refill
+											</div>
+											<div className="text-sm text-muted-foreground">
+												Max's medication is due for a
+												refill. Order now.
+											</div>
+										</div>
+									</div>
+								</div>
+							</CardContent>
+							<CardFooter>
+								<Button className="text-primary bg-[#eec3e8] hover:bg-accent hover:text-accent-foreground text-[#d254c1]">
+									View all notifications
+								</Button>
+							</CardFooter>
+						</Card>
+					</section>
+				)}
+
+				{/* Pet Profiles */}
+				{activeSection === "petProfiles" && (
+					<section>
+						<div className="flex items-center justify-between">
+							<div>
+								<h2 className="flex text-2xl font-bold items-start">
+									Pet Profiles
+								</h2>
+								<p className="text-muted-foreground items-start">
+									Quick access to your pet's information.
+								</p>
+							</div>
+							<Link
+								to={"/pet/add"}
+								className="p-2 rounded-lg bg-[#eec3e8] text-black"
+							>
+								Add Pet
+							</Link>
+						</div>
+						<div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+							<Card>
+								<CardContent className="flex flex-col items-center gap-4">
+									<Avatar className="h-20 w-20 border">
+										<AvatarImage src="/placeholder-user.jpg" />
+										<AvatarFallback className="text-6xl">
+											🐶
+										</AvatarFallback>
+									</Avatar>
+									<div className="text-center">
+										<div className="font-medium">Bella</div>
+										<div className="text-sm text-muted-foreground">
+											Golden Retriever
+										</div>
+									</div>
+									<div className="flex gap-2">
+										<Button variant="outline" size="sm">
+											<Link to={"/pet/view"}>View</Link>
+										</Button>
+										<Button variant="outline" size="sm">
+											Edit
+										</Button>
+									</div>
+								</CardContent>
+							</Card>
+							<Card>
+								<CardContent className="flex flex-col items-center gap-4">
+									<Avatar className="h-20 w-20 border">
+										<AvatarImage src="/placeholder-user.jpg" />
+										<AvatarFallback className="text-6xl">
+											🐱
+										</AvatarFallback>
+									</Avatar>
+									<div className="text-center">
+										<div className="font-medium">Max</div>
+										<div className="text-sm text-muted-foreground">
+											Persian Cat
+										</div>
+									</div>
+									<div className="flex gap-2">
+										<Button variant="outline" size="sm">
+											<Link to={"/pet/view"}>View</Link>
+										</Button>
+										<Button variant="outline" size="sm">
+											Edit
+										</Button>
+									</div>
+								</CardContent>
+							</Card>
+							<Card>
+								<CardContent className="flex flex-col items-center gap-4">
+									<Avatar className="h-20 w-20 border">
+										<AvatarImage src="/placeholder-user.jpg" />
+										<AvatarFallback className="text-6xl">
+											🐰
+										</AvatarFallback>
+									</Avatar>
+									<div className="text-center">
+										<div className="font-medium">Daisy</div>
+										<div className="text-sm text-muted-foreground">
+											Dwarf Rabbit
+										</div>
+									</div>
+									<div className="flex gap-2">
+										<Button variant="outline" size="sm">
+											View
+										</Button>
+										<Button variant="outline" size="sm">
+											Edit
+										</Button>
+									</div>
+								</CardContent>
+							</Card>
+							<Card>
+								<CardContent className="flex flex-col items-center gap-4">
+									<Avatar className="h-20 w-20 border">
+										<AvatarImage src="/placeholder-user.jpg" />
+										<AvatarFallback className="text-6xl">
+											🐦
+										</AvatarFallback>
+									</Avatar>
+									<div className="text-center">
+										<div className="font-medium">Chirpy</div>
+										<div className="text-sm text-muted-foreground">
+											Cockatiel
+										</div>
+									</div>
+									<div className="flex gap-2">
+										<Button variant="outline" size="sm">
+											View
+										</Button>
+										<Button variant="outline" size="sm">
+											Edit
+										</Button>
+									</div>
+								</CardContent>
+							</Card>
+						</div>
+					</section>
+				)}
+
+				{/* Bookings */}
+				{activeSection === "bookings" && (
+					<section>
+						<div className="flex items-center justify-between">
+							<div>
+								<h2 className="flex items-start text-2xl font-bold">
+									Bookings
+								</h2>
+								<p className="text-muted-foreground">
+									View and manage your pet care appointments.
+								</p>
+							</div>
+							<Button className="bg-[#eec3e8] text-black">
+								New Booking
+							</Button>
+						</div>
+						<div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+							<Card>
+								<CardContent>
+									<div className="flex items-center gap-4">
+										<Avatar className="h-12 w-12 border mt-2">
+											<AvatarImage src="/placeholder-user.jpg" />
+											<AvatarFallback className="text-3xl">
+												🐶
+											</AvatarFallback>
+										</Avatar>
+										<div>
+											<div className="font-medium">Bella</div>
+											<div className="text-sm text-muted-foreground">
+												Grooming Appointment
+											</div>
+										</div>
+									</div>
+									<div className="mt-4 flex items-center justify-between mb-4">
 										<div className="text-sm text-muted-foreground">
 											June 15, 2023 - 10:00 AM
 										</div>
 									</div>
-								</div>
-								<div className="flex items-center gap-4">
-									<div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#eec3e8] text-black">
-										<CalendarIcon className="h-6 w-6" />
+									<div className="flex gap-2">
+										<Button variant="outline" size="sm">
+											View
+										</Button>
+										<Button variant="outline" size="sm">
+											Cancel
+										</Button>
 									</div>
-									<div>
-										<div className="font-medium">
-											Vet Checkup
+								</CardContent>
+							</Card>
+							<Card>
+								<CardContent>
+									<div className="flex items-center gap-4 mt-2">
+										<Avatar className="h-12 w-12 border">
+											<AvatarImage src="/placeholder-user.jpg" />
+											<AvatarFallback className="text-3xl">
+												🐱
+											</AvatarFallback>
+										</Avatar>
+										<div>
+											<div className="font-medium">Max</div>
+											<div className="text-sm text-muted-foreground">
+												Vet Checkup
+											</div>
 										</div>
+									</div>
+									<div className="mt-4 flex items-center justify-between mb-4">
 										<div className="text-sm text-muted-foreground">
 											June 20, 2023 - 2:30 PM
 										</div>
 									</div>
-								</div>
-							</div>
-						</CardContent>
-						<CardFooter>
-							<Button className="text-primary bg-white">
-								View all bookings
-							</Button>
-						</CardFooter>
-					</Card>
-					<Card>
-						<CardHeader>
-							<CardTitle>Recent Activity</CardTitle>
-							<CardDescription>
-								See your latest pet-related activities.
-							</CardDescription>
-						</CardHeader>
-						<CardContent>
-							<div className="grid gap-4">
-								<div className="flex items-center gap-4">
-									<div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-accent-foreground">
-										<PawPrintIcon className="h-6 w-6" />
+									<div className="flex gap-2">
+										<Button variant="outline" size="sm">
+											View
+										</Button>
+										<Button variant="outline" size="sm">
+											Cancel
+										</Button>
 									</div>
-									<div>
-										<div className="font-medium">
-											Bella's Vet Visit
+								</CardContent>
+							</Card>
+							<Card>
+								<CardContent>
+									<div className="flex items-center gap-4 mt-2">
+										<Avatar className="h-12 w-12 border">
+											<AvatarImage src="/placeholder-user.jpg" />
+											<AvatarFallback className="text-3xl">
+												🐰
+											</AvatarFallback>
+										</Avatar>
+										<div>
+											<div className="font-medium">Daisy</div>
+											<div className="text-sm text-muted-foreground">
+												Boarding
+											</div>
 										</div>
+									</div>
+									<div className="mt-4 flex items-center justify-between">
 										<div className="text-sm text-muted-foreground">
-											June 10, 2023
+											June 25, 2023 - June 30, 2023
 										</div>
+										<div className="flex gap-2" />
 									</div>
-								</div>
-								<div className="flex items-center gap-4">
-									<div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-accent-foreground">
-										<PawPrintIcon className="h-6 w-6" />
-									</div>
-									<div>
-										<div className="font-medium">
-											Grooming for Max
-										</div>
-										<div className="text-sm text-muted-foreground">
-											June 5, 2023
-										</div>
-									</div>
-								</div>
-							</div>
-						</CardContent>
-						<CardFooter>
-							<Button className="text-primary bg-white">
-								View all activity
-							</Button>
-						</CardFooter>
-					</Card>
-					<Card>
-						<CardHeader>
-							<CardTitle>Notifications</CardTitle>
-							<CardDescription>
-								Stay up-to-date with important alerts.
-							</CardDescription>
-						</CardHeader>
-						<CardContent>
-							<div className="grid gap-4">
-								<div className="flex gap-4">
-									<div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500 text-blue-500-foreground">
-										<BellIcon className="h-5 w-5" />
-									</div>
-									<div>
-										<div className="font-medium">
-											Appointment Reminder
-										</div>
-										<div className="text-sm text-muted-foreground">
-											Your grooming appointment is
-											tomorrow at 10 AM.
-										</div>
-									</div>
-								</div>
-								<div className="flex items-center gap-4">
-									<div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500 text-blue-500-foreground">
-										<BellIcon className="h-6 w-6" />
-									</div>
-									<div>
-										<div className="font-medium">
-											Medication Refill
-										</div>
-										<div className="text-sm text-muted-foreground">
-											Max's medication is due for a
-											refill. Order now.
-										</div>
-									</div>
-								</div>
-							</div>
-						</CardContent>
-						<CardFooter>
-							<Button className="text-primary bg-white">
-								View all notifications
-							</Button>
-						</CardFooter>
-					</Card>
-				</section>
-				<section>
-					<div className="flex items-center justify-between">
-						<div>
-							<h2 className="flex text-2xl font-bold items-start">
-								Pet Profiles
-							</h2>
-							<p className="text-muted-foreground items-start">
-								Quick access to your pet's information.
-							</p>
+								</CardContent>
+							</Card>
 						</div>
-						<Link
-							to={"/pet/add"}
-							className="p-2 rounded-lg bg-[#eec3e8] text-black"
-						>
-							Add Pet
-						</Link>
-					</div>
-					<div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-						<Card>
-							<CardContent className="flex flex-col items-center gap-4">
-								<Avatar className="h-20 w-20 border">
-									<AvatarImage src="/placeholder-user.jpg" />
-									<AvatarFallback className="text-6xl">
-										🐶
-									</AvatarFallback>
-								</Avatar>
-								<div className="text-center">
-									<div className="font-medium">Bella</div>
-									<div className="text-sm text-muted-foreground">
-										Golden Retriever
-									</div>
-								</div>
-								<div className="flex gap-2">
-									<Button variant="outline" size="sm">
-										<Link to={"/pet/view"}>View</Link>
-									</Button>
-									<Button variant="outline" size="sm">
-										Edit
-									</Button>
-								</div>
-							</CardContent>
-						</Card>
-						<Card>
-							<CardContent className="flex flex-col items-center gap-4">
-								<Avatar className="h-20 w-20 border">
-									<AvatarImage src="/placeholder-user.jpg" />
-									<AvatarFallback className="text-6xl">
-										🐱
-									</AvatarFallback>
-								</Avatar>
-								<div className="text-center">
-									<div className="font-medium">Max</div>
-									<div className="text-sm text-muted-foreground">
-										Persian Cat
-									</div>
-								</div>
-								<div className="flex gap-2">
-									<Button variant="outline" size="sm">
-										<Link to={"/pet/view"}>View</Link>
-									</Button>
-									<Button variant="outline" size="sm">
-										Edit
-									</Button>
-								</div>
-							</CardContent>
-						</Card>
-						<Card>
-							<CardContent className="flex flex-col items-center gap-4">
-								<Avatar className="h-20 w-20 border">
-									<AvatarImage src="/placeholder-user.jpg" />
-									<AvatarFallback className="text-6xl">
-										🐰
-									</AvatarFallback>
-								</Avatar>
-								<div className="text-center">
-									<div className="font-medium">Daisy</div>
-									<div className="text-sm text-muted-foreground">
-										Dwarf Rabbit
-									</div>
-								</div>
-								<div className="flex gap-2">
-									<Button variant="outline" size="sm">
-										View
-									</Button>
-									<Button variant="outline" size="sm">
-										Edit
-									</Button>
-								</div>
-							</CardContent>
-						</Card>
-						<Card>
-							<CardContent className="flex flex-col items-center gap-4">
-								<Avatar className="h-20 w-20 border">
-									<AvatarImage src="/placeholder-user.jpg" />
-									<AvatarFallback className="text-6xl">
-										🐦
-									</AvatarFallback>
-								</Avatar>
-								<div className="text-center">
-									<div className="font-medium">Chirpy</div>
-									<div className="text-sm text-muted-foreground">
-										Cockatiel
-									</div>
-								</div>
-								<div className="flex gap-2">
-									<Button variant="outline" size="sm">
-										View
-									</Button>
-									<Button variant="outline" size="sm">
-										Edit
-									</Button>
-								</div>
-							</CardContent>
-						</Card>
-					</div>
-				</section>
-				<section>
-					<div className="flex items-center justify-between">
-						<div>
-							<h2 className="flex items-start text-2xl font-bold">
-								Bookings
-							</h2>
-							<p className="text-muted-foreground">
-								View and manage your pet care appointments.
-							</p>
-						</div>
-						<Button className="bg-[#eec3e8] text-black">
-							New Booking
-						</Button>
-					</div>
-					<div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-						<Card>
-							<CardContent>
-								<div className="flex items-center gap-4">
-									<Avatar className="h-12 w-12 border mt-2">
-										<AvatarImage src="/placeholder-user.jpg" />
-										<AvatarFallback className="text-3xl">
-											🐶
-										</AvatarFallback>
-									</Avatar>
-									<div>
-										<div className="font-medium">Bella</div>
-										<div className="text-sm text-muted-foreground">
-											Grooming Appointment
-										</div>
-									</div>
-								</div>
-								<div className="mt-4 flex items-center justify-between mb-4">
-									<div className="text-sm text-muted-foreground">
-										June 15, 2023 - 10:00 AM
-									</div>
-								</div>
-								<div className="flex gap-2">
-									<Button variant="outline" size="sm">
-										View
-									</Button>
-									<Button variant="outline" size="sm">
-										Cancel
-									</Button>
-								</div>
-							</CardContent>
-						</Card>
-						<Card>
-							<CardContent>
-								<div className="flex items-center gap-4 mt-2">
-									<Avatar className="h-12 w-12 border">
-										<AvatarImage src="/placeholder-user.jpg" />
-										<AvatarFallback className="text-3xl">
-											🐱
-										</AvatarFallback>
-									</Avatar>
-									<div>
-										<div className="font-medium">Max</div>
-										<div className="text-sm text-muted-foreground">
-											Vet Checkup
-										</div>
-									</div>
-								</div>
-								<div className="mt-4 flex items-center justify-between mb-4">
-									<div className="text-sm text-muted-foreground">
-										June 20, 2023 - 2:30 PM
-									</div>
-								</div>
-								<div className="flex gap-2">
-									<Button variant="outline" size="sm">
-										View
-									</Button>
-									<Button variant="outline" size="sm">
-										Cancel
-									</Button>
-								</div>
-							</CardContent>
-						</Card>
-						<Card>
-							<CardContent>
-								<div className="flex items-center gap-4 mt-2">
-									<Avatar className="h-12 w-12 border">
-										<AvatarImage src="/placeholder-user.jpg" />
-										<AvatarFallback className="text-3xl">
-											🐰
-										</AvatarFallback>
-									</Avatar>
-									<div>
-										<div className="font-medium">Daisy</div>
-										<div className="text-sm text-muted-foreground">
-											Boarding
-										</div>
-									</div>
-								</div>
-								<div className="mt-4 flex items-center justify-between">
-									<div className="text-sm text-muted-foreground">
-										June 25, 2023 - June 30, 2023
-									</div>
-									<div className="flex gap-2" />
-								</div>
-							</CardContent>
-						</Card>
-					</div>
-				</section>
+					</section>
+				)}
 			</main>
 		</div>
 	);
