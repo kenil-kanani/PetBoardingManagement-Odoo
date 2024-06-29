@@ -33,12 +33,17 @@
   - **200 OK:** 
     ```json
     {
-    "token": "TOKEN",
-    "user": {
-        "email": "kenil2@gmail.com",
-        "role": "admin"
+        "statusCode": 200,
+        "data": {
+            "token": "TOKEN",
+            "user": {
+                "email": "user@example.com",
+                "role": "user"
+            }
+        },
+        "message": "User logged in successfully",
+        "success": true
     }
-}
     ```
   - **404 Not Found:** User not found or invalid credentials.
   - **500 Internal Server Error:** Other error messages.
