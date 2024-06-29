@@ -52,3 +52,5 @@
   - **Usage:**
     - **Header:** `Authorization: Bearer <JWT_TOKEN>`
     - **Function:** Checks if the token is valid, decodes it to fetch user details, and attaches the user to the request object for further processing in subsequent middleware or routes.
+
+
