@@ -42,7 +42,7 @@ export default function AddPetProfile() {
 		e.preventDefault();
 		try {
 			const response = await axios.post(
-				"{{petBoardingServer}}/pets/add",
+				"http://localhost:3000/pets/add",
 				formData,
 			);
 			console.log("Pet added successfully:", response.data);
