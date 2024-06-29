@@ -46,7 +46,12 @@ export default function Login() {
       );
 
       if (response.status === 200) {
+<<<<<<< HEAD
+        toast.success("Login successful");
+=======
+        toast.success("Login successful")
         alert("Login successful");
+>>>>>>> c87b59f80ee62be4ba313ebca85025325efb273b
         const data = response.data.data;
         const { token, user } = data;
         login({
@@ -55,15 +60,16 @@ export default function Login() {
           user: user.email,
         });
         if (user.role === "user") {
-          navigate("/user-dashboard");
+          navigate("/userDashboard");
         } else if (user.email === "admin") {
-          navigate("/admin-dashboard");
+          navigate("/adminDashboard");
         }
       } else {
         toast.error("Login failed");
       }
     } catch (e) {
       console.log(e);
+      toast.error("Login failed");
     }
   };
   return (

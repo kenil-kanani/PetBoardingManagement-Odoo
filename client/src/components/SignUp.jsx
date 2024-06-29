@@ -58,11 +58,12 @@ export default function SignUp() {
         alert("Registration successful");
         navigate("/login");
       } else {
+        toast.error("Signup failed")
         alert("Registration failed");
       }
     } catch (e) {
       console.log(e);
-      toast.error("Signup failed")
+      
       if (e.response.data.includes("duplicate key error")) {
         alert("User already exists");
       }

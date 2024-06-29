@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Separator } from "../components/ui/separator";
 import {
@@ -17,8 +17,19 @@ import {
 	SelectContent,
 	SelectItem,
 } from "../components/ui/select";
+import { AuthContext } from "@/context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function AddPetProfile() {
+	const { role, isLoggedIn } = useContext(AuthContext);
+	const navigate = useNavigate();
+	useEffect(() => {
+		if (!isLoggedIn) {
+			navigate("/login");
+		} else if (role === "admin") {
+			navigate("/adminDashboard");
+		}
+	}, []);
 	const [formData, setFormData] = useState({
 		name: "",
 		breed: "",
@@ -42,8 +53,13 @@ export default function AddPetProfile() {
 		e.preventDefault();
 		try {
 			const response = await axios.post(
-				"{{petBoardingServer}}/pets/add",
+				"http://localhost:3000/api/pets/add",
 				formData,
+				{
+					headers: {
+						Authorization: `${window.localStorage.getItem("token")}`,
+					},
+				}
 			);
 			console.log("Pet added successfully:", response.data);
 			// Handle success (e.g., show a success message, redirect, etc.)
@@ -54,19 +70,17 @@ export default function AddPetProfile() {
 	};
 
 	return (
-		<div className="flex flex-col md:flex-row items-start gap-8">
+		<div className="flex flex-col md:flex-row items-start gap-8 bg-muted pb-3">
 			<div className="flex-1">
 				<Tabs defaultValue="info" className="w-full">
 					<TabsList className="grid grid-cols-2 gap-2">
 						<TabsTrigger value="info">Info</TabsTrigger>
 						<TabsTrigger value="medical">Medical</TabsTrigger>
 					</TabsList>
-					<TabsContent value="info">
+					<TabsContent value="info" className="bg-card shadow mx-24 p-10">
 						<form onSubmit={handleSubmit} className="grid gap-6">
 							<div className="grid gap-2">
-								<h2 className="text-lg font-semibold">
-									Pet Information
-								</h2>
+								<h2 className="text-lg font-semibold">Pet Information</h2>
 								<div className="grid sm:grid-cols-2 gap-4">
 									<div className="grid gap-1">
 										<Label htmlFor="name">Name</Label>
@@ -117,9 +131,7 @@ export default function AddPetProfile() {
 										/>
 									</div>
 									<div className="grid gap-1">
-										<Label htmlFor="description">
-											Description
-										</Label>
+										<Label htmlFor="description">Description</Label>
 										<Input
 											id="description"
 											value={formData.description}
@@ -128,50 +140,30 @@ export default function AddPetProfile() {
 									</div>
 								</div>
 							</div>
-							<div className="grid gap-2">
-								<h2 className="text-lg font-semibold">
-									Owner Information
-								</h2>
-								<div className="grid sm:grid-cols-2 gap-4">
-									<div className="grid gap-1">
-										<Label htmlFor="owner">Owner ID</Label>
-										<Input
-											id="owner"
-											value={formData.owner}
-											onChange={handleChange}
-										/>
-									</div>
-								</div>
-							</div>
+
 							<Button type="submit" className="mt-4">
 								Submit
 							</Button>
 						</form>
 					</TabsContent>
-					<TabsContent value="medical">
+					<TabsContent value="medical" className="bg-card shadow mx-24 p-10">
 						<div className="grid gap-6">
 							<div className="grid gap-2">
-								<h2 className="text-lg font-semibold">
-									Medical Records
-								</h2>
+								<h2 className="text-lg font-semibold">Medical Records</h2>
 								<div className="grid gap-4">
 									<div className="flex items-center gap-4">
 										<div className="bg-muted rounded-md p-2 flex-shrink-0">
 											<FileIcon className="w-6 h-6 text-muted-foreground" />
 										</div>
 										<div className="flex-1">
-											<div className="font-medium">
-												Vaccination Record
-											</div>
+											<div className="font-medium">Vaccination Record</div>
 											<div className="text-sm text-muted-foreground">
 												Last updated: June 15, 2023
 											</div>
 										</div>
 										<Button variant="outline" size="icon">
 											<DownloadIcon className="w-5 h-5" />
-											<span className="sr-only">
-												Download
-											</span>
+											<span className="sr-only">Download</span>
 										</Button>
 									</div>
 									<div className="flex items-center gap-4">
@@ -179,18 +171,14 @@ export default function AddPetProfile() {
 											<FileIcon className="w-6 h-6 text-muted-foreground" />
 										</div>
 										<div className="flex-1">
-											<div className="font-medium">
-												Dietary Preferences
-											</div>
+											<div className="font-medium">Dietary Preferences</div>
 											<div className="text-sm text-muted-foreground">
 												Last updated: April 20, 2023
 											</div>
 										</div>
 										<Button variant="outline" size="icon">
 											<DownloadIcon className="w-5 h-5" />
-											<span className="sr-only">
-												Download
-											</span>
+											<span className="sr-only">Download</span>
 										</Button>
 									</div>
 									<div className="flex items-center gap-4">
@@ -198,32 +186,24 @@ export default function AddPetProfile() {
 											<FileIcon className="w-6 h-6 text-muted-foreground" />
 										</div>
 										<div className="flex-1">
-											<div className="font-medium">
-												Veterinary Exam
-											</div>
+											<div className="font-medium">Veterinary Exam</div>
 											<div className="text-sm text-muted-foreground">
 												Last updated: September 12, 2022
 											</div>
 										</div>
 										<Button variant="outline" size="icon">
 											<DownloadIcon className="w-5 h-5" />
-											<span className="sr-only">
-												Download
-											</span>
+											<span className="sr-only">Download</span>
 										</Button>
 									</div>
 								</div>
 							</div>
 							<div className="grid gap-2">
-								<h2 className="text-lg font-semibold">
-									Upload New Record
-								</h2>
+								<h2 className="text-lg font-semibold">Upload New Record</h2>
 								<div className="grid gap-4">
 									<div className="grid sm:grid-cols-2 gap-4">
 										<div className="grid gap-1">
-											<Label htmlFor="record-type">
-												Record Type
-											</Label>
+											<Label htmlFor="record-type">Record Type</Label>
 											<Select id="record-type">
 												<SelectTrigger>
 													<SelectValue placeholder="Select record type" />
@@ -235,26 +215,17 @@ export default function AddPetProfile() {
 													<SelectItem value="diet">
 														Dietary Preferences
 													</SelectItem>
-													<SelectItem value="exam">
-														Veterinary Exam
-													</SelectItem>
+													<SelectItem value="exam">Veterinary Exam</SelectItem>
 												</SelectContent>
 											</Select>
 										</div>
 										<div className="grid gap-1">
-											<Label htmlFor="record-date">
-												Date
-											</Label>
-											<Input
-												id="record-date"
-												type="date"
-											/>
+											<Label htmlFor="record-date">Date</Label>
+											<Input id="record-date" type="date" />
 										</div>
 									</div>
 									<div className="grid gap-1">
-										<Label htmlFor="record-file">
-											File
-										</Label>
+										<Label htmlFor="record-file">File</Label>
 										<Input id="record-file" type="file" />
 									</div>
 									<Button>Upload Record</Button>

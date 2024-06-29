@@ -6,12 +6,7 @@ import {
 } from "@/components/ui/collapsible";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-
-const Link = ({ href, children, ...props }) => (
-  <a href={href} {...props}>
-    {children}
-  </a>
-);
+import { Link } from "react-router-dom";
 
 export default function Services() {
   return (
@@ -51,9 +46,8 @@ export default function Services() {
                     <span className="font-bold">$5/day</span>
                   </div>
                   <Link
-                    href="#"
+                    to={"/booking"}
                     className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-                    prefetch={false}
                   >
                     Book Now
                   </Link>
@@ -77,9 +71,8 @@ export default function Services() {
                     <span className="font-bold">$35+</span>
                   </div>
                   <Link
-                    href="#"
+                    to={"/booking"}
                     className="inline-flex h-10 items-center justify-center rounded-md bg-secondary px-8 text-sm font-medium text-secondary-foreground shadow transition-colors hover:bg-secondary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-                    prefetch={false}
                   >
                     Book Now
                   </Link>
@@ -102,9 +95,8 @@ export default function Services() {
                     <span className="font-bold">$50/session</span>
                   </div>
                   <Link
-                    href="#"
+                    to={"/booking"}
                     className="inline-flex h-10 items-center justify-center rounded-md bg-muted px-8 text-sm font-medium text-muted-foreground shadow transition-colors hover:bg-muted/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-                    prefetch={false}
                   >
                     Book Now
                   </Link>
