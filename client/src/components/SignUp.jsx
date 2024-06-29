@@ -5,6 +5,7 @@ import { Link, Navigate, Route, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function SignUp() {
   const { user, loading } = useContext(AuthContext);
@@ -51,6 +52,7 @@ export default function SignUp() {
       );
       console.log(response);
       if (response.status === 201) {
+        toast.success("Signup successfully")
         alert("Registration successful");
         navigate("/login");
       } else {
@@ -58,6 +60,7 @@ export default function SignUp() {
       }
     } catch (e) {
       console.log(e);
+      toast.error("Signup failed")
       if (e.response.data.includes("duplicate key error")) {
         alert("User already exists");
       }

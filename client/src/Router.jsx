@@ -13,6 +13,9 @@ import PetProfile from "./components/PetProfile";
 import AddPetProfile from "./components/AddPetProfile";
 import Booking from "./components/Booking";
 import { AuthProvider, AuthContext } from "./context/AuthContext";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 function Router() {
   return (
@@ -30,6 +33,7 @@ function Router() {
           <Route path="/pet/add" element={<AddPetProfile />} />
           <Route path="/booking" element={<Booking />} />
         </Routes>
+        <ToastContainer />
       </AuthProvider>
     </BrowserRouter>
   );

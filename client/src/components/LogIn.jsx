@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 const Link = ({ href, children, ...props }) => (
   <a href={href} {...props}>
@@ -45,7 +46,7 @@ export default function Login() {
       });
       const data = await response.json();
       if (response.status === 200) {
-        alert("Login successful");
+        toast.success("Login successful");
         const d = {
           token: data.token,
           role: data.role,
@@ -54,7 +55,7 @@ export default function Login() {
         login(d);
         navigate("/");
       } else {
-        alert("Login failed");
+        toast.error("Login failed");
       }
     } catch (e) {
       console.log(e);
