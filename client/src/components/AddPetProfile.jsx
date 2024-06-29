@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Separator } from "../components/ui/separator";
 import {
@@ -17,9 +17,12 @@ import {
   SelectContent,
   SelectItem,
 } from "../components/ui/select";
+import { AuthContext } from "@/context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function AddPetProfile() {
   const { role, isLoggedIn } = useContext(AuthContext);
+  const navigate = useNavigate();
   useEffect(() => {
     if (!isLoggedIn) {
       navigate("/login");
