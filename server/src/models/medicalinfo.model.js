@@ -52,4 +52,7 @@ const medicalInfoSchema = new Schema(
   },
   { timestamps: true }
 );
-export const MedicalInfo = mongoose.model("MedicalInfo", medicalInfoSchema);
+
+const MedicalInfo = mongoose.model("MedicalInfo", medicalInfoSchema);
+
+export default MedicalInfo;
