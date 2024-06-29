@@ -4,18 +4,8 @@ import { ApiError } from "../utils/ApiError.js";
 import mongoose, { isValidObjectId } from "mongoose";
 
 export const addPet = async (req, res) => {
-  const {
-    name,
-    breed,
-    age,
-    gender,
-    weight,
-    description,
-    owner,
-    color,
-    characteristics = [],
-  } = req.body;
-
+  const { name, breed, age, gender, weight, description, color, characteristics = [] } = req.body;
+  const owner = req.user?._id;
   try {
     if (!name || !breed || !age || !gender || !weight || !description || !owner || !color)
       throw new ApiError(400, "Please provide all the required fields");
