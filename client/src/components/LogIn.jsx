@@ -69,7 +69,7 @@ export default function Login() {
   };
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-background">
-      <div className="bg-card p-8 shadow sm:rounded-lg">
+      <div className=" w-[300px] sm:w-[450px] bg-card p-8 shadow sm:rounded-lg">
         <h2 className="text-2xl font-bold tracking-tight text-primary-foreground">
           Login
         </h2>
