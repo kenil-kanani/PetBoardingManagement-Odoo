@@ -4,16 +4,16 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import HeroSection from './components/HeroSection'
 import Booking from './components/Booking'
+import PetProfile from './components/PetProfile'
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(0)
 
   return (
     <>
       <Booking/>
-
     </>
-  );
+  )
 }
 
-export default App;
+export default App
