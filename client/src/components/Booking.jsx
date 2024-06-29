@@ -109,7 +109,7 @@ export default function Booking() {
               </label>
               <Select onValueChange={setGuests}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select guests" />
+                  <SelectValue placeholder="Select your pet" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="1">1 animal</SelectItem>
@@ -126,7 +126,7 @@ export default function Booking() {
                 htmlFor="special-requirements"
                 className="block text-sm font-medium text-gray-700 mb-1"
               >
-                Special Requirements
+                Special Services
               </label>
               <div>
                 {specialRequirements.map((req) => (

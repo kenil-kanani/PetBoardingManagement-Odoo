@@ -24,8 +24,8 @@ function Router() {
           <Route path="/services" element={<Services />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/user-dashboard" element={<UserDashboard />} />
-          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/userDashboard" element={<UserDashboard />} />
+          <Route path="/adminDashboard" element={<AdminDashboard />} />
           <Route path="/pet/view" element={<PetProfile />} />
           <Route path="/pet/add" element={<AddPetProfile />} />
           <Route path="/booking" element={<Booking />} />
