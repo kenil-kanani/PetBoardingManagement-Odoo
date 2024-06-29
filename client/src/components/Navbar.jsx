@@ -12,7 +12,7 @@ const Navbar = () => {
       <header className="px-4 lg:px-6 h-14 flex items-center bg-primary ">
         <Link to={"/"} className="flex items-center justify-center">
           <PawPrintIcon className="h-6 w-6" />
-          <span className="sr-only">Paw Care</span>
+          <span className="ml-5 text-xl font-bold">Paw Care</span>
         </Link>
         <nav className="ml-auto flex gap-4 sm:gap-6 justify-center items-center">
           <Link
