@@ -4,7 +4,7 @@ import { Card } from "../components/ui/card"
 import { Avatar, AvatarImage, AvatarFallback } from '../components/ui/avatar';
 import { Separator } from '../components/ui/separator';
 import dog from "../../public/png1.png"
-import png2 from "../../public/br_logo."
+import png2 from "../../public/br_logo.png"
 
 // Dummy Link component to replace Next.js Link
 const Link = ({ href, children, ...props }) => (
@@ -146,7 +146,7 @@ const FeaturesSection = () => (
 					</ul>
 				</div>
 				<img
-					src="/placeholder.svg"
+					src={png2}
 					alt="Features"
 					className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full lg:order-last"
 				/>
