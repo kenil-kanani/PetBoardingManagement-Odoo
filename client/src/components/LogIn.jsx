@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 
 const Link = ({ href, children, ...props }) => (
@@ -59,7 +60,7 @@ export default function Login() {
           navigate("/adminDashboard");
         }
       } else {
-        alert("Login failed");
+        toast.error("Login failed");
       }
     } catch (e) {
       console.log(e);
