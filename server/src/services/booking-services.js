@@ -15,7 +15,7 @@ const updateBooking = async (bookingId) => {
     return await bookRepository.updateBooking(bookingId);
   } catch (error) {
     console.log(error);
-    throw new ApiError(500, "Error while updating booking");
+    throw new ApiError(500, error.message);
   }
 };
 
