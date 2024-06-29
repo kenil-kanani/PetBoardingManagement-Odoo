@@ -9,7 +9,7 @@ import {
 import { Card } from "../components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "../components/ui/avatar";
 import { Separator } from "../components/ui/separator";
-import dog from "../assets/react.svg";
+import dog from "../assets/br_logo.png";
 
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
@@ -133,7 +133,7 @@ const TestimonialsSection = () => (
         </div>
       </div>
 
-      <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12 ">
+      <div className="mx-auto flexitems-center gap-6 py-12  max-w-2xl">
         <Carousel
           opts={{
             align: "start",
@@ -141,7 +141,7 @@ const TestimonialsSection = () => (
             autoplay: true,
             autoplayInterval: 5000,
           }}
-          className="mt-12 "
+          className="mt-12 mx-auto"
         >
           <CarouselContent>
             <CarouselItem>

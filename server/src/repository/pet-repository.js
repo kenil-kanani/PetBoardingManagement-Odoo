@@ -38,6 +38,7 @@ const createPet = async ({
       characteristics,
     });
     await newPet.save();
+    
     return newPet;
   } catch (error) {
     console.log("createPet error: ", error);
