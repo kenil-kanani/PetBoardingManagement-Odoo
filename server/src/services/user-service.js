@@ -11,14 +11,18 @@ const authenticateUser = async (email, password) => {
     if (!user) {
         throw new Error('User not found');
     }
-
-    console.log(user.password);
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
         throw new Error('Invalid credentials');
     }
     const token = jwt.sign({ id: user._id, role: user.role }, 'your_jwt_secret', { expiresIn: '1h' });
-    return token;
+    return {
+        token,
+        user: {
+            email: user.email,
+            role: user.role
+        }
+    };
 };
 
 const userService = {

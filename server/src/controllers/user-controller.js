@@ -13,11 +13,9 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
     const { email, password } = req.body;
     try {
-        console.log(email, password);
-        const token = await userService.authenticateUser(email, password);
-        res.status(200).json({ token });
+        const { token, user } = await userService.authenticateUser(email, password);
+        res.status(200).json({ token, user });
     } catch (error) {
-        console.log(error);
         if (error.message === 'User not found' || error.message === 'Invalid credentials') {
             res.status(404).send(error.message);
         } else {
