@@ -46,6 +46,7 @@ export default function Login() {
       );
 
       if (response.status === 200) {
+        toast.success("Login successful")
         alert("Login successful");
         const data = response.data.data;
         const { token, user } = data;

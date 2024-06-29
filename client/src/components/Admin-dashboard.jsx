@@ -49,10 +49,10 @@ export default function AdminDashboard() {
   const { isLoggedIn, role } = useContext(AuthContext);
   const navigate = useNavigate();
   useEffect(() => {
-    if (!isLoggedIn || role !== "admin") {
-      alert("You are not authorized to view this page");
-      navigate("/");
-    }
+    // if (!isLoggedIn || role !== "admin") {
+    //   alert("You are not authorized to view this page");
+    //   navigate("/");
+    // }
   }, [isLoggedIn, role]);
 
   return (
@@ -93,34 +93,6 @@ export default function AdminDashboard() {
                 </Link>
               </TooltipTrigger>
               <TooltipContent side="right">Booking Management</TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Link
-                  href="#"
-                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                  prefetch={false}
-                >
-                  <HomeIcon className="h-5 w-5" />
-                  <span className="sr-only">Facility Management</span>
-                </Link>
-              </TooltipTrigger>
-              <TooltipContent side="right">Facility Management</TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Link
-                  href="#"
-                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                  prefetch={false}
-                >
-                  <LineChartIcon className="h-5 w-5" />
-                  <span className="sr-only">Reports and Analytics</span>
-                </Link>
-              </TooltipTrigger>
-              <TooltipContent side="right">
-                Reports and Analytics
-              </TooltipContent>
             </Tooltip>
           </TooltipProvider>
         </nav>
@@ -260,8 +232,6 @@ export default function AdminDashboard() {
                     <TableRow>
                       <TableHead>Name</TableHead>
                       <TableHead>Email</TableHead>
-                      <TableHead>Role</TableHead>
-                      <TableHead>Status</TableHead>
                       <TableHead>
                         <span className="sr-only">Actions</span>
                       </TableHead>
@@ -273,30 +243,6 @@ export default function AdminDashboard() {
                         <div className="font-medium">John Doe</div>
                       </TableCell>
                       <TableCell>john@example.com</TableCell>
-                      <TableCell>Admin</TableCell>
-                      <TableCell>
-                        <Badge variant="secondary">Active</Badge>
-                      </TableCell>
-                      <TableCell>
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button
-                              aria-haspopup="true"
-                              size="icon"
-                              variant="ghost"
-                            >
-                              <MoveHorizontalIcon className="h-4 w-4" />
-                              <span className="sr-only">Toggle menu</span>
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end">
-                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                            <DropdownMenuItem>View</DropdownMenuItem>
-                            <DropdownMenuItem>Edit</DropdownMenuItem>
-                            <DropdownMenuItem>Delete</DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell>
@@ -304,9 +250,6 @@ export default function AdminDashboard() {
                       </TableCell>
                       <TableCell>jane@example.com</TableCell>
                       <TableCell>User</TableCell>
-                      <TableCell>
-                        <Badge variant="outline">Inactive</Badge>
-                      </TableCell>
                       <TableCell>
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
@@ -334,9 +277,6 @@ export default function AdminDashboard() {
                       </TableCell>
                       <TableCell>bob@example.com</TableCell>
                       <TableCell>User</TableCell>
-                      <TableCell>
-                        <Badge variant="secondary">Active</Badge>
-                      </TableCell>
                       <TableCell>
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
@@ -401,17 +341,6 @@ export default function AdminDashboard() {
                     />
                   </div>
                 </div>
-                <Table className="mt-4">
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Booking ID</TableHead>
-                      <TableHead>User</TableHead>
-                      <TableHead>Facility</TableHead>
-                      <TableHead>Date</TableHead>
-                      <TableHead>Status</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                </Table>
               </CardContent>
             </Card>
           </div>
