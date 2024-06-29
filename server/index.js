@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import connectToMongo from './src/config/dbConfig.js';
 import { PORT } from './src/config/serverConfig.js';
+import userRoutes from './src/routes/user-routes.js';
 
 const setUpAndStartServer = async () => {
     try {
@@ -12,6 +13,8 @@ const setUpAndStartServer = async () => {
         app.use(cors());
         app.use(express.json());
         app.use(express.urlencoded({ extended: true }));
+
+        app.use('/api/auth', userRoutes);
 
         app.listen(PORT, () => {
             console.log(`Server started on PORT : ${PORT}`);
