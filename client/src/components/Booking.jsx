@@ -20,6 +20,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "../lib/utils";
 import { AuthContext } from "@/context/AuthContext";
+import { useNavigate } from "react-router-dom";
 const specialRequirements = [
   { id: 1, name: "Accessible room", price: 50 },
   { id: 2, name: "Dietary needs", price: 30 },
@@ -28,6 +29,7 @@ const specialRequirements = [
 
 export default function Booking() {
   const { role, isLoggedIn } = useContext(AuthContext);
+  const navigate = useNavigate();
   useEffect(() => {
     if (!isLoggedIn) {
       navigate("/login");
