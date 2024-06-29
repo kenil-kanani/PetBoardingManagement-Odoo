@@ -19,6 +19,14 @@ import {
 } from "../components/ui/select";
 
 export default function AddPetProfile() {
+  const { role, isLoggedIn } = useContext(AuthContext);
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate("/login");
+    } else if (role === "admin") {
+      navigate("/adminDashboard");
+    }
+  }, []);
   const [formData, setFormData] = useState({
     name: "",
     breed: "",
