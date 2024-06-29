@@ -55,9 +55,9 @@ export default function Login() {
           user: user.email,
         });
         if (user.role === "user") {
-          navigate("/user-dashboard");
+          navigate("/userDashboard");
         } else if (user.email === "admin") {
-          navigate("/admin-dashboard");
+          navigate("/adminDashboard");
         }
       } else {
         toast.error("Login failed");
