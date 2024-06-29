@@ -132,106 +132,102 @@ const TestimonialsSection = () => (
           </p>
         </div>
       </div>
-      <div className="flex justify-center bg-primary m-auto">
-        <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12 ">
-          <Carousel
-            opts={{
-              align: "center",
-              loop: true,
-              autoplay: true,
-              autoplayInterval: 5000,
-            }}
-            className="mt-12 "
-          >
-            <CarouselContent>
-              <CarouselItem>
-                <Card className="p-6 flex flex-col gap-4">
-                  <div className="flex items-center gap-4">
-                    <Avatar>
-                      <AvatarImage src="/placeholder-user.jpg" />
-                      <AvatarFallback>JD</AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <h4 className="text-lg font-semibold">John Doe</h4>
-                      <p className="text-sm text-muted-foreground">Dog Owner</p>
-                    </div>
+
+      <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12 ">
+        <Carousel
+          opts={{
+            align: "start",
+            loop: true,
+            autoplay: true,
+            autoplayInterval: 5000,
+          }}
+          className="mt-12 "
+        >
+          <CarouselContent>
+            <CarouselItem>
+              <Card className="p-6 flex flex-col gap-4">
+                <div className="flex items-center gap-4">
+                  <Avatar>
+                    <AvatarImage src="/placeholder-user.jpg" />
+                    <AvatarFallback>JD</AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <h4 className="text-lg font-semibold">John Doe</h4>
+                    <p className="text-sm text-muted-foreground">Dog Owner</p>
                   </div>
-                  <p className="text-muted-foreground">
-                    "Paw Care has been a game-changer for my family. The\n
-                    personalized care plans and 24/7 access to vets have\n given
-                    me peace of mind knowing my pup is in good\n hands."
-                  </p>
-                </Card>
-              </CarouselItem>
-              <CarouselItem>
-                <Card className="p-6 flex flex-col gap-4">
-                  <div className="flex items-center gap-4">
-                    <Avatar>
-                      <AvatarImage src="/placeholder-user.jpg" />
-                      <AvatarFallback>SM</AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <h4 className="text-lg font-semibold">Sarah Miller</h4>
-                      <p className="text-sm text-muted-foreground">Cat Owner</p>
-                    </div>
+                </div>
+                <p className="text-muted-foreground">
+                  "Paw Care has been a game-changer for my family. The\n
+                  personalized care plans and 24/7 access to vets have\n given
+                  me peace of mind knowing my pup is in good\n hands."
+                </p>
+              </Card>
+            </CarouselItem>
+            <CarouselItem>
+              <Card className="p-6 flex flex-col gap-4">
+                <div className="flex items-center gap-4">
+                  <Avatar>
+                    <AvatarImage src="/placeholder-user.jpg" />
+                    <AvatarFallback>SM</AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <h4 className="text-lg font-semibold">Sarah Miller</h4>
+                    <p className="text-sm text-muted-foreground">Cat Owner</p>
                   </div>
-                  <p className="text-muted-foreground">
-                    "I was hesitant to try a virtual vet service, but Paw\n Care
-                    has exceeded my expectations. The vets are\n knowledgeable,
-                    and the convenience is unbeatable."
-                  </p>
-                </Card>
-              </CarouselItem>
-              <CarouselItem>
-                <Card className="p-6 flex flex-col gap-4">
-                  <div className="flex items-center gap-4">
-                    <Avatar>
-                      <AvatarImage src="/placeholder-user.jpg" />
-                      <AvatarFallback>TW</AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <h4 className="text-lg font-semibold">Tom Wilson</h4>
-                      <p className="text-sm text-muted-foreground">
-                        Bird Owner
-                      </p>
-                    </div>
+                </div>
+                <p className="text-muted-foreground">
+                  "I was hesitant to try a virtual vet service, but Paw\n Care
+                  has exceeded my expectations. The vets are\n knowledgeable,
+                  and the convenience is unbeatable."
+                </p>
+              </Card>
+            </CarouselItem>
+            <CarouselItem>
+              <Card className="p-6 flex flex-col gap-4">
+                <div className="flex items-center gap-4">
+                  <Avatar>
+                    <AvatarImage src="/placeholder-user.jpg" />
+                    <AvatarFallback>TW</AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <h4 className="text-lg font-semibold">Tom Wilson</h4>
+                    <p className="text-sm text-muted-foreground">Bird Owner</p>
                   </div>
-                  <p className="text-muted-foreground">
-                    "Paw Care has been a lifesaver for my feathered friend.\n
-                    The personalized care plans and 24/7 access to vets\n have
-                    been invaluable. I highly recommend this service!"
-                  </p>
-                </Card>
-              </CarouselItem>
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-          </Carousel>
-        </div>
+                </div>
+                <p className="text-muted-foreground">
+                  "Paw Care has been a lifesaver for my feathered friend.\n The
+                  personalized care plans and 24/7 access to vets\n have been
+                  invaluable. I highly recommend this service!"
+                </p>
+              </Card>
+            </CarouselItem>
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
       </div>
     </div>
   </section>
 );
 
-
 const PawPrintIcon = (props) => (
-	<svg
-		{...props}
-		xmlns="http://www.w3.org/2000/svg"
-		width="24"
-		height="24"
-		viewBox="0 0 24 24"
-		fill="none"
-		stroke="currentColor"
-		strokeWidth="2"
-		strokeLinecap="round"
-		strokeLinejoin="round"
-	>
-		<circle cx="11" cy="4" r="2" />
-		<circle cx="18" cy="8" r="2" />
-		<circle cx="20" cy="16" r="2" />
-		<path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z" />
-	</svg>
+  <svg
+    {...props}
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <circle cx="11" cy="4" r="2" />
+    <circle cx="18" cy="8" r="2" />
+    <circle cx="20" cy="16" r="2" />
+    <path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z" />
+  </svg>
 );
 
 const HeroSection = () => (
