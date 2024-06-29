@@ -30,6 +30,7 @@ const bookingSchema = new Schema(
       required: true,
     },
     checkOutDate: {
+      // UPCOMING, CANCELLED, PAST
       type: Date,
       required: true,
     },
