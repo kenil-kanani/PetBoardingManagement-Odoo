@@ -1,12 +1,12 @@
-import medicalInfoRepository from '../repository/medicalinfo.repository.js';
+import medicalInfoRepository from '../repository/medicalinfo-repository.js';
 import { ApiError } from '../utils/ApiError.js';
 import { uploadOnCloudinary } from '../utils/cloudinary.js';
 
-const addMedicalDocs = async (petId, type) => {
+const addMedicalDocs = async (petId, type, docLocalPath) => {
     try {
-        const docLocalPath = req.files?.medicalDocsFile[0]?.path;
         const docCloudinaryResponse = await uploadOnCloudinary(docLocalPath);
         if (!docCloudinaryResponse) {
+            console.log("Cloudinary response", docCloudinaryResponse)
             throw new ApiError(400, 'Failed to upload medical docs');
         }
         const url = docCloudinaryResponse.secure_url;
@@ -15,6 +15,7 @@ const addMedicalDocs = async (petId, type) => {
         const medicalInfo = await medicalInfoRepository.addMedicalDocs(petId, type, url, fileName, lastModified);
         return medicalInfo;
     } catch (error) {
+        console.log("Service error", error)
         if (error.message === 'Failed to upload medical docs') {
             throw error;
         }
