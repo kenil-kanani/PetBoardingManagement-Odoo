@@ -43,17 +43,19 @@ import {
 import { Badge } from "../components/ui/badge";
 
 import { AuthContext } from "@/context/AuthContext";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 
 export default function AdminDashboard() {
   const { isLoggedIn, role } = useContext(AuthContext);
   const navigate = useNavigate();
   useEffect(() => {
-    if (!isLoggedIn || role !== "admin") {
-      alert("You are not authorized to view this page");
-      navigate("/");
-    }
+    // if (!isLoggedIn || role !== "admin") {
+    //   alert("You are not authorized to view this page");
+    //   navigate("/");
+    // }
   }, [isLoggedIn, role]);
+
+  const [selectedTab, setSelectedTab] = useState("users");
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
@@ -61,9 +63,8 @@ export default function AdminDashboard() {
         <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
           <TooltipProvider>
             <Link
-              href="#"
+              to={"/adminDashboard"}
               className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
-              prefetch={false}
             >
               <Package2Icon className="h-4 w-4 transition-all group-hover:scale-110" />
               <span className="sr-only">Acme Inc</span>
@@ -71,9 +72,10 @@ export default function AdminDashboard() {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
-                  href="#"
+                  to={"/adminDashboard"}
                   className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                   prefetch={false}
+                  onClick={() => setSelectedTab("users")}
                 >
                   <UsersIcon className="h-5 w-5" />
                   <span className="sr-only">User Management</span>
@@ -84,15 +86,32 @@ export default function AdminDashboard() {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
-                  href="#"
+                  to={"/adminDashboard"}
                   className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                  prefetch={false}
+                  onClick={() => setSelectedTab("bookings")}
                 >
                   <CalendarIcon className="h-5 w-5" />
                   <span className="sr-only">Booking Management</span>
                 </Link>
               </TooltipTrigger>
               <TooltipContent side="right">Booking Management</TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </nav>
+        <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link
+                  href="#"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                  prefetch={false}
+                >
+                  <SettingsIcon className="h-5 w-5" />
+                  <span className="sr-only">Settings</span>
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="right">Settings</TooltipContent>
             </Tooltip>
           </TooltipProvider>
         </nav>
@@ -153,6 +172,187 @@ export default function AdminDashboard() {
         </header>
         <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
           <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
+<<<<<<< HEAD
+            {selectedTab === "users" && (
+              <Card className="sm:col-span-2 lg:col-span-1 xl:col-span-2">
+                <CardHeader>
+                  <CardTitle>User Management</CardTitle>
+                  <CardDescription>
+                    View and manage all registered users.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Name</TableHead>
+                        <TableHead>Email</TableHead>
+                        <TableHead>Role</TableHead>
+                        <TableHead>Status</TableHead>
+                        <TableHead>
+                          <span className="sr-only">Actions</span>
+                        </TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell>
+                          <div className="font-medium">John Doe</div>
+                        </TableCell>
+                        <TableCell>john@example.com</TableCell>
+                        <TableCell>Admin</TableCell>
+                        <TableCell>
+                          <Badge variant="secondary">Active</Badge>
+                        </TableCell>
+                        <TableCell>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button
+                                aria-haspopup="true"
+                                size="icon"
+                                variant="ghost"
+                              >
+                                <MoveHorizontalIcon className="h-4 w-4" />
+                                <span className="sr-only">Toggle menu</span>
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                              <DropdownMenuItem>View</DropdownMenuItem>
+                              <DropdownMenuItem>Edit</DropdownMenuItem>
+                              <DropdownMenuItem>Delete</DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>
+                          <div className="font-medium">Jane Smith</div>
+                        </TableCell>
+                        <TableCell>jane@example.com</TableCell>
+                        <TableCell>User</TableCell>
+                        <TableCell>
+                          <Badge variant="outline">Inactive</Badge>
+                        </TableCell>
+                        <TableCell>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button
+                                aria-haspopup="true"
+                                size="icon"
+                                variant="ghost"
+                              >
+                                <MoveHorizontalIcon className="h-4 w-4" />
+                                <span className="sr-only">Toggle menu</span>
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                              <DropdownMenuItem>View</DropdownMenuItem>
+                              <DropdownMenuItem>Edit</DropdownMenuItem>
+                              <DropdownMenuItem>Delete</DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>
+                          <div className="font-medium">Bob Johnson</div>
+                        </TableCell>
+                        <TableCell>bob@example.com</TableCell>
+                        <TableCell>User</TableCell>
+                        <TableCell>
+                          <Badge variant="secondary">Active</Badge>
+                        </TableCell>
+                        <TableCell>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button
+                                aria-haspopup="true"
+                                size="icon"
+                                variant="ghost"
+                              >
+                                <MoveHorizontalIcon className="h-4 w-4" />
+                                <span className="sr-only">Toggle menu</span>
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                              <DropdownMenuItem>View</DropdownMenuItem>
+                              <DropdownMenuItem>Edit</DropdownMenuItem>
+                              <DropdownMenuItem>Delete</DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </CardContent>
+              </Card>
+            )}
+            {selectedTab === "bookings" && (
+              <Card>
+                <CardHeader>
+                  <CardTitle>Booking Management</CardTitle>
+                  <CardDescription>
+                    View and manage all bookings.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex items-center justify-between">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="h-8 gap-1"
+                        >
+                          <FilterIcon className="h-3.5 w-3.5" />
+                          <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                            Filter
+                          </span>
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuLabel>Filter by</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuCheckboxItem checked>
+                          Upcoming
+                        </DropdownMenuCheckboxItem>
+                        <DropdownMenuCheckboxItem>
+                          Past
+                        </DropdownMenuCheckboxItem>
+                        <DropdownMenuCheckboxItem>
+                          Cancelled
+                        </DropdownMenuCheckboxItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                    <div className="flex items-center gap-2">
+                      <Input
+                        type="date"
+                        className="h-8 w-[150px] rounded-md border border-muted bg-background px-3 text-sm"
+                      />
+                      <Input
+                        type="date"
+                        className="h-8 w-[150px] rounded-md border border-muted bg-background px-3 text-sm"
+                      />
+                    </div>
+                  </div>
+                  <Table className="mt-4">
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Booking ID</TableHead>
+                        <TableHead>User</TableHead>
+                        <TableHead>Facility</TableHead>
+                        <TableHead>Date</TableHead>
+                        <TableHead>Status</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                  </Table>
+                </CardContent>
+              </Card>
+            )}
+=======
             <Card className="sm:col-span-2 lg:col-span-1 xl:col-span-2">
               <CardHeader>
                 <CardTitle>User Management</CardTitle>
@@ -166,8 +366,6 @@ export default function AdminDashboard() {
                     <TableRow>
                       <TableHead>Name</TableHead>
                       <TableHead>Email</TableHead>
-                      <TableHead>Role</TableHead>
-                      <TableHead>Status</TableHead>
                       <TableHead>
                         <span className="sr-only">Actions</span>
                       </TableHead>
@@ -179,30 +377,6 @@ export default function AdminDashboard() {
                         <div className="font-medium">John Doe</div>
                       </TableCell>
                       <TableCell>john@example.com</TableCell>
-                      <TableCell>Admin</TableCell>
-                      <TableCell>
-                        <Badge variant="secondary">Active</Badge>
-                      </TableCell>
-                      <TableCell>
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button
-                              aria-haspopup="true"
-                              size="icon"
-                              variant="ghost"
-                            >
-                              <MoveHorizontalIcon className="h-4 w-4" />
-                              <span className="sr-only">Toggle menu</span>
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end">
-                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                            <DropdownMenuItem>View</DropdownMenuItem>
-                            <DropdownMenuItem>Edit</DropdownMenuItem>
-                            <DropdownMenuItem>Delete</DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell>
@@ -210,9 +384,6 @@ export default function AdminDashboard() {
                       </TableCell>
                       <TableCell>jane@example.com</TableCell>
                       <TableCell>User</TableCell>
-                      <TableCell>
-                        <Badge variant="outline">Inactive</Badge>
-                      </TableCell>
                       <TableCell>
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
@@ -240,9 +411,6 @@ export default function AdminDashboard() {
                       </TableCell>
                       <TableCell>bob@example.com</TableCell>
                       <TableCell>User</TableCell>
-                      <TableCell>
-                        <Badge variant="secondary">Active</Badge>
-                      </TableCell>
                       <TableCell>
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
@@ -307,19 +475,9 @@ export default function AdminDashboard() {
                     />
                   </div>
                 </div>
-                <Table className="mt-4">
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Booking ID</TableHead>
-                      <TableHead>User</TableHead>
-                      <TableHead>Facility</TableHead>
-                      <TableHead>Date</TableHead>
-                      <TableHead>Status</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                </Table>
               </CardContent>
             </Card>
+>>>>>>> c87b59f80ee62be4ba313ebca85025325efb273b
           </div>
         </main>
       </div>

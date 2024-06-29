@@ -46,7 +46,12 @@ export default function Login() {
       );
 
       if (response.status === 200) {
+<<<<<<< HEAD
+        toast.success("Login successful");
+=======
+        toast.success("Login successful")
         alert("Login successful");
+>>>>>>> c87b59f80ee62be4ba313ebca85025325efb273b
         const data = response.data.data;
         const { token, user } = data;
         login({
@@ -64,6 +69,7 @@ export default function Login() {
       }
     } catch (e) {
       console.log(e);
+      toast.error("Login failed");
     }
   };
   return (
