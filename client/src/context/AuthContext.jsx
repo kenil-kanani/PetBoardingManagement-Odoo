@@ -28,16 +28,20 @@ const AuthProvider = ({ children }) => {
             Authorization: `${token}`,
           },
         });
-        const data = await response.json();
+        const data = response.data.data;
         console.log(data);
-        setRole(data.role);
-        setUser(data.user);
+        setRole(data.user.role);
+        setUser(data.user.email);
         setIsLoggedIn(true);
         setLoading(false);
+        if (role === "user") {
+          navigate("/user-dashboard");
+        } else if (role === "admin") {
+          navigate("/admin-dashboard");
+        }
       } catch (e) {
         console.log(e);
         setIsLoggedIn(false);
-
         setLoading(false);
       }
     }
@@ -51,6 +55,7 @@ const AuthProvider = ({ children }) => {
   // Check for existing login state in Local Storage on component mount
 
   const login = (data) => {
+    console.log(data);
     window.localStorage.setItem("token", data.token);
     setRole(data.role);
     setUser(data.user);
@@ -62,6 +67,7 @@ const AuthProvider = ({ children }) => {
     setRole(null);
     setUser(null);
     localStorage.removeItem("token");
+    navigate("/");
   };
 
   return (

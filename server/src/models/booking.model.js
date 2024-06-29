@@ -11,9 +11,15 @@ import mongoose, { Schema } from "mongoose";
 
 const bookingSchema = new Schema(
   {
-    serviceType: {
+    serviceType: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Service",
+      },
+    ],
+    petId: {
       type: Schema.Types.ObjectId,
-      ref: "Service",
+      ref: "Pet",
     },
     bookedBy: {
       type: Schema.Types.ObjectId,
@@ -24,14 +30,6 @@ const bookingSchema = new Schema(
       required: true,
     },
     checkOutDate: {
-      type: Date,
-      required: true,
-    },
-    startedAt: {
-      type: Date,
-      required: true,
-    },
-    endedAt: {
       type: Date,
       required: true,
     },
