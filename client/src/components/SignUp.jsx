@@ -14,14 +14,19 @@ export default function SignUp() {
     phone: "",
   });
 
-  const submitHandler = (e) => {
+  const  submitHandler = async (e) => {
     e.preventDefault();
     console.log(formdata);
     if (cnfpassword !== password) {
       alert("Passwords do not match");
       return;
     }
-
+    const response = await axios.post("http://localhost:5000/api/auth/register", formdata);
+    if(response.status === 200) {
+        
+    }else{
+        alert("Registration failed");
+    }
     setFormData({
       name: "",
       email: "",
