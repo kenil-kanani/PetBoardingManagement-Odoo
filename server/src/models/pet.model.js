@@ -38,6 +38,11 @@ const petSchema = new Schema(
       type: String,
       required: false,
     },
+    characteristics: {
+      type: [String],
+      required: false,
+      default: [],
+    },
     owner: {
       type: Schema.Types.ObjectId,
       ref: "User",
