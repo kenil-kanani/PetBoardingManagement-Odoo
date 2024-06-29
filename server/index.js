@@ -4,6 +4,7 @@ import connectToMongo from "./src/config/dbConfig.js";
 import { PORT } from "./src/config/serverConfig.js";
 import userRoutes from "./src/routes/user-routes.js";
 import petRoutes from "./src/routes/pet-routes.js";
+import medicalinfoRoutes from "./src/routes/medicalinfo-routes.js";
 import serviceRoutes from "./src/routes/service-routes.js";
 
 const setUpAndStartServer = async () => {
@@ -18,6 +19,7 @@ const setUpAndStartServer = async () => {
 
     app.use("/api/auth", userRoutes);
     app.use("/api/pets", petRoutes);
+    app.use("/api/medicalinfo", medicalinfoRoutes);
     app.use("/api/services", serviceRoutes);
 
     app.listen(PORT, () => {
