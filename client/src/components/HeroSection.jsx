@@ -10,15 +10,11 @@ import { Card } from "../components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "../components/ui/avatar";
 import { Separator } from "../components/ui/separator";
 import dog from "../assets/react.svg";
-import Navbar from "./Navbar";
+
 import Footer from "./Footer";
+import { Link } from "react-router-dom";
 
 // Dummy Link component to replace Next.js Link
-const Link = ({ href, children, ...props }) => (
-  <a href={href} {...props}>
-    {children}
-  </a>
-);
 
 const Hero = () => (
   <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
@@ -42,13 +38,13 @@ const Hero = () => (
           </div>
           <div className="flex flex-col gap-2 min-[400px]:flex-row">
             <Link
-              href="#"
+              to={"/services"}
               className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
             >
               Book Now
             </Link>
             <Link
-              href="#"
+              to={"/signup"}
               className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
             >
               Sign Up
@@ -65,7 +61,7 @@ const FeaturesSection = () => (
     <div className="container px-4 md:px-6">
       <div className="flex flex-col items-center justify-center space-y-4 text-center">
         <div className="space-y-2">
-          <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">
+          <div className="inline-block rounded-lg bg-primary px-3 py-1 text-sm">
             Key Features
           </div>
           <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
@@ -136,85 +132,89 @@ const TestimonialsSection = () => (
           </p>
         </div>
       </div>
-      <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
-        <Carousel opts={{ align: "start" }} className="w-full">
-          <CarouselContent>
-            <CarouselItem>
-              <Card className="p-6">
-                <div className="flex items-center gap-4">
-                  <Avatar>
-                    <AvatarImage src="/placeholder-user.jpg" />
-                    <AvatarFallback>JD</AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <h4 className="text-lg font-semibold">John Doe</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Satisfied Customer
-                    </p>
+      <div className="flex justify-center bg-primary m-auto">
+        <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12 ">
+          <Carousel
+            opts={{
+              align: "center",
+              loop: true,
+              autoplay: true,
+              autoplayInterval: 5000,
+            }}
+            className="mt-12 "
+          >
+            <CarouselContent>
+              <CarouselItem>
+                <Card className="p-6 flex flex-col gap-4">
+                  <div className="flex items-center gap-4">
+                    <Avatar>
+                      <AvatarImage src="/placeholder-user.jpg" />
+                      <AvatarFallback>JD</AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <h4 className="text-lg font-semibold">John Doe</h4>
+                      <p className="text-sm text-muted-foreground">Dog Owner</p>
+                    </div>
                   </div>
-                </div>
-                <Separator className="my-4" />
-                <p className="text-muted-foreground">
-                  "The live video streaming feature is a game-changer! I can
-                  check in on my pets anytime, and the personalized care plan
-                  has made a huge difference."
-                </p>
-              </Card>
-            </CarouselItem>
-            <CarouselItem>
-              <Card className="p-6">
-                <div className="flex items-center gap-4">
-                  <Avatar>
-                    <AvatarImage src="/placeholder-user.jpg" />
-                    <AvatarFallback>JD</AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <h4 className="text-lg font-semibold">Jane Smith</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Satisfied Customer
-                    </p>
+                  <p className="text-muted-foreground">
+                    "Paw Care has been a game-changer for my family. The\n
+                    personalized care plans and 24/7 access to vets have\n given
+                    me peace of mind knowing my pup is in good\n hands."
+                  </p>
+                </Card>
+              </CarouselItem>
+              <CarouselItem>
+                <Card className="p-6 flex flex-col gap-4">
+                  <div className="flex items-center gap-4">
+                    <Avatar>
+                      <AvatarImage src="/placeholder-user.jpg" />
+                      <AvatarFallback>SM</AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <h4 className="text-lg font-semibold">Sarah Miller</h4>
+                      <p className="text-sm text-muted-foreground">Cat Owner</p>
+                    </div>
                   </div>
-                </div>
-                <Separator className="my-4" />
-                <p className="text-muted-foreground">
-                  "The virtual vet consultations have been a lifesaver. I can
-                  get expert advice without having to leave my home."
-                </p>
-              </Card>
-            </CarouselItem>
-            <CarouselItem>
-              <Card className="p-6">
-                <div className="flex items-center gap-4">
-                  <Avatar>
-                    <AvatarImage src="/placeholder-user.jpg" />
-                    <AvatarFallback>JD</AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <h4 className="text-lg font-semibold">Michael Johnson</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Satisfied Customer
-                    </p>
+                  <p className="text-muted-foreground">
+                    "I was hesitant to try a virtual vet service, but Paw\n Care
+                    has exceeded my expectations. The vets are\n knowledgeable,
+                    and the convenience is unbeatable."
+                  </p>
+                </Card>
+              </CarouselItem>
+              <CarouselItem>
+                <Card className="p-6 flex flex-col gap-4">
+                  <div className="flex items-center gap-4">
+                    <Avatar>
+                      <AvatarImage src="/placeholder-user.jpg" />
+                      <AvatarFallback>TW</AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <h4 className="text-lg font-semibold">Tom Wilson</h4>
+                      <p className="text-sm text-muted-foreground">
+                        Bird Owner
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <Separator className="my-4" />
-                <p className="text-muted-foreground">
-                  "The team at Paw Care is truly exceptional. They've provided
-                  outstanding service and care for my pets."
-                </p>
-              </Card>
-            </CarouselItem>
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
+                  <p className="text-muted-foreground">
+                    "Paw Care has been a lifesaver for my feathered friend.\n
+                    The personalized care plans and 24/7 access to vets\n have
+                    been invaluable. I highly recommend this service!"
+                  </p>
+                </Card>
+              </CarouselItem>
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+        </div>
       </div>
     </div>
   </section>
 );
 
 const HeroSection = () => (
-  <div className="flex flex-col min-h-[100dvh]">
-    <Navbar />
+  <div className="flex flex-col min-h-[100dvh] w-full">
     <main className="flex-1">
       <Hero />
       <FeaturesSection />
