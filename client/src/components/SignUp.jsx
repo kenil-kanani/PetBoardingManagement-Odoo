@@ -14,7 +14,7 @@ export default function SignUp() {
     phone: "",
   });
 
-  const  submitHandler = async (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     console.log(formdata);
     if (cnfpassword !== password) {
