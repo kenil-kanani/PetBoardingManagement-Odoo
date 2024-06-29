@@ -30,14 +30,18 @@ const bookingSchema = new Schema(
       required: true,
     },
     checkOutDate: {
-      // UPCOMING, CANCELLED, PAST
       type: Date,
       required: true,
     },
-    status: {
-      type: String,
-      required: true,
+    isCancelled: {
+      type: Boolean,
+      default: false,
     },
+    // status: {
+    // UPCOMING, STARTED, ENDED
+    //   type: String,
+    //   required: true,
+    // },
     additionalMessage: {
       type: String,
       required: false,
