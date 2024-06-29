@@ -2,14 +2,9 @@ import mongoose, { Schema } from "mongoose";
 
 // id string
 // serviceName string required
-// location string required
-// contact string required
-// capacity number required
-// startedAt date required
-// endedAt date required
-// operatingHours number required
+// category string required
+// description string required
 // price number required
-// images string[]
 
 const serviceSchema = new Schema(
   {
@@ -17,37 +12,17 @@ const serviceSchema = new Schema(
       type: String,
       required: true,
     },
-    location: {
+    category: {
       type: String,
       required: true,
     },
-    contact: {
+    description: {
       type: String,
-      required: true,
-    },
-    capacity: {
-      type: Number,
-      required: true,
-    },
-    startedAt: {
-      type: Date,
-      required: true,
-    },
-    endedAt: {
-      type: Date,
-      required: true,
-    },
-    operatingHours: {
-      type: Number,
       required: true,
     },
     price: {
       type: Number,
       required: true,
-    },
-    images: {
-      type: [String],
-      required: false,
     },
   },
   { timestamps: true }

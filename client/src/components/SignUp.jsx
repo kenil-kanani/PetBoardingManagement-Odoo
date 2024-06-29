@@ -1,11 +1,19 @@
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, Navigate, Route, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { AuthContext } from "../context/AuthContext";
 
 export default function SignUp() {
+  const { user, loading } = useContext(AuthContext);
+  useEffect(() => {
+    if (!loading && user) {
+      navigate("/");
+    }
+  });
+  const navigate = useNavigate();
   const [formdata, setFormData] = useState({
     name: "",
     email: "",
@@ -14,19 +22,47 @@ export default function SignUp() {
     phone: "",
   });
 
-  const  submitHandler = async (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
+
     console.log(formdata);
-    if (cnfpassword !== password) {
+    if (formdata.cnfpassword !== formdata.password) {
       alert("Passwords do not match");
       return;
     }
-    const response = await axios.post("http://localhost:5000/api/auth/register", formdata);
-    if(response.status === 200) {
-        
-    }else{
+    // const opt = {
+    //     method: "POST",
+    //     url: "http://localhost:3000/api/auth/signup",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify(formdata),
+    //     };
+    // }
+    const data = {
+      name: formdata.name,
+      email: formdata.email,
+      password: formdata.password,
+      phone: formdata.phone,
+      role: "user",
+    };
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/auth/signup",
+        data
+      );
+      console.log(response);
+      if (response.status === 201) {
+        alert("Registration successful");
+        navigate("/login");
+      } else {
         alert("Registration failed");
+      }
+    } catch (e) {
+      console.log(e);
+      if (e.response.data.includes("duplicate key error")) {
+        alert("User already exists");
+      }
     }
+
     setFormData({
       name: "",
       email: "",
