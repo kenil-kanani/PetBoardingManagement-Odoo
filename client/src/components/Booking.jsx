@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import {
-	Popover,
-	PopoverTrigger,
-	PopoverContent,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -11,106 +11,102 @@ import { Calendar as CalendarIcon } from "lucide-react";
 // import { DateRange } from "react-day-picker";
 import { addDays, format } from "date-fns";
 import {
-	Select,
-	SelectTrigger,
-	SelectValue,
-	SelectContent,
-	SelectItem,
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "../lib/utils";
-
+import { AuthContext } from "@/context/AuthContext";
 const specialRequirements = [
-	{ id: 1, name: "Accessible room", price: 50 },
-	{ id: 2, name: "Dietary needs", price: 30 },
-	{ id: 3, name: "Extra bed", price: 20 },
+  { id: 1, name: "Accessible room", price: 50 },
+  { id: 2, name: "Dietary needs", price: 30 },
+  { id: 3, name: "Extra bed", price: 20 },
 ];
 
 export default function Booking() {
-	const [date, setDate] = useState({
-		from: new Date(2022, 0, 20),
-		to: addDays(new Date(2022, 0, 20), 20),
-	});
-	const [guests, setGuests] = useState("");
-	const [rooms, setRooms] = useState("");
-	const [selectedRequirements, setSelectedRequirements] = useState([]);
+  const { role, isLoggedIn } = useContext(AuthContext);
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate("/login");
+    } else if (role === "admin") {
+      navigate("/adminDashboard");
+    }
+  }, []);
+  const [date, setDate] = useState({
+    from: new Date(2022, 0, 20),
+    to: addDays(new Date(2022, 0, 20), 20),
+  });
+  const [guests, setGuests] = useState("");
+  const [rooms, setRooms] = useState("");
+  const [selectedRequirements, setSelectedRequirements] = useState([]);
 
-	const handleRequirementChange = (id) => {
-		setSelectedRequirements((prev) =>
-			prev.includes(id)
-				? prev.filter((reqId) => reqId !== id)
-				: [...prev, id],
-		);
-	};
+  const handleRequirementChange = (id) => {
+    setSelectedRequirements((prev) =>
+      prev.includes(id) ? prev.filter((reqId) => reqId !== id) : [...prev, id]
+    );
+  };
 
-	const totalPrice =
-		1200 +
-		selectedRequirements.reduce((acc, reqId) => {
-			const req = specialRequirements.find((r) => r.id === reqId);
-			return acc + (req ? req.price : 0);
-		}, 0);
+  const totalPrice =
+    1200 +
+    selectedRequirements.reduce((acc, reqId) => {
+      const req = specialRequirements.find((r) => r.id === reqId);
+      return acc + (req ? req.price : 0);
+    }, 0);
 
-	return (
-		<div className="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8 ">
-			<div className="grid grid-cols-1 lg:grid-cols-1 gap-8 ">
-				<div className="bg-white shadow-lg rounded-lg p-6 lg:p-8">
-					<h2 className="text-2xl font-bold mb-4">Book Your Stay</h2>
-					<form className="grid grid-cols-1 md:grid-cols-2 gap-6">
-						<div>
-							<label
-								htmlFor="date"
-								className="block text-sm font-medium text-gray-700 mb-1"
-							>
-								{" "}
-								Booking date range
-							</label>
-							<Popover>
-								<PopoverTrigger asChild>
-									<Button
-										id="date"
-										variant={"outline"}
-										className={cn(
-											"w-full justify-start text-left font-normal",
-											!date && "text-muted-foreground",
-										)}
-									>
-										<CalendarIcon className="mr-2 h-4 w-4" />
-										{date?.from ? (
-											date.to ? (
-												<>
-													{format(
-														date.from,
-														"LLL dd, y",
-													)}{" "}
-													-{" "}
-													{format(
-														date.to,
-														"LLL dd, y",
-													)}
-												</>
-											) : (
-												format(date.from, "LLL dd, y")
-											)
-										) : (
-											<span>Pick a date</span>
-										)}
-									</Button>
-								</PopoverTrigger>
-								<PopoverContent
-									className="w-auto p-0"
-									align="start"
-								>
-									<Calendar
-										initialFocus
-										mode="range"
-										defaultMonth={date?.from}
-										selected={date}
-										onSelect={setDate}
-										numberOfMonths={2}
-									/>
-								</PopoverContent>
-							</Popover>
-						</div>
+  return (
+    <div className="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8 ">
+      <div className="grid grid-cols-1 lg:grid-cols-1 gap-8 ">
+        <div className="bg-white shadow-lg rounded-lg p-6 lg:p-8">
+          <h2 className="text-2xl font-bold mb-4">Book Your Stay</h2>
+          <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label
+                htmlFor="date"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                {" "}
+                Booking date range
+              </label>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    id="date"
+                    variant={"outline"}
+                    className={cn(
+                      "w-full justify-start text-left font-normal",
+                      !date && "text-muted-foreground"
+                    )}
+                  >
+                    <CalendarIcon className="mr-2 h-4 w-4" />
+                    {date?.from ? (
+                      date.to ? (
+                        <>
+                          {format(date.from, "LLL dd, y")} -{" "}
+                          {format(date.to, "LLL dd, y")}
+                        </>
+                      ) : (
+                        format(date.from, "LLL dd, y")
+                      )
+                    ) : (
+                      <span>Pick a date</span>
+                    )}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar
+                    initialFocus
+                    mode="range"
+                    defaultMonth={date?.from}
+                    selected={date}
+                    onSelect={setDate}
+                    numberOfMonths={2}
+                  />
+                </PopoverContent>
+              </Popover>
+            </div>
 
 						<div className="block">
 							<label
